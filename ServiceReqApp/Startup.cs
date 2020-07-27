@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
+using ServiceReqApp.Infrastructure.Extensions;
 
 namespace ServiceReqApp
 {
@@ -33,6 +34,7 @@ namespace ServiceReqApp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddRepositories();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

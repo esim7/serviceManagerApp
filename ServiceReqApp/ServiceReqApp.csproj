@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ServiceReqApp.DataAccess\ServiceReqApp.DataAccess.csproj" />
     <ProjectReference Include="..\ServiceReqApp.Domain\ServiceReqApp.Domain.csproj" />
+    <ProjectReference Include="..\ServiceReqApp.Infrastructure\ServiceReqApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
