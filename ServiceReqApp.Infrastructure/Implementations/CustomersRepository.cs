@@ -18,12 +18,12 @@ namespace ServiceReqApp.Infrastructure.Implementations
 
         public async Task<ICollection<Customer>> GetAllAsync()
         {
-            return await _context.Customers.Include(c => c.Request).ToListAsync();
+            return await _context.Customers/*.Include(c => c.Request)*/.ToListAsync();
         }
 
-        public Task<Customer> GetByIdAsync(int id)
+        public Task<Customer> GetByIdAsync(int? id)
         {
-            return _context.Customers.Include(c => c.Request).FirstOrDefaultAsync(c => c.Id == id);
+            return _context.Customers/*.Include(c => c.Request)*/.FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Customer> CreateAsync(Customer entity)
@@ -32,7 +32,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return createdCustomer.Entity;
         }
 
-        public async Task<Customer> UpdateAsync(int id, Customer entity)
+        public async Task<Customer> UpdateAsync(Customer entity)
         {
             var updatedCustomer = _context.Customers.Update(entity);
             return updatedCustomer.Entity;

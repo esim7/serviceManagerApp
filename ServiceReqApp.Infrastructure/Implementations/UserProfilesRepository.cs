@@ -21,7 +21,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return await _context.UserProfiles.Include(u => u.User).ToListAsync();
         }
 
-        public async Task<UserProfile> GetByIdAsync(int id)
+        public async Task<UserProfile> GetByIdAsync(int? id)
         {
             return await _context.UserProfiles.Include(u => u.User)
                 .FirstOrDefaultAsync(u => u.Id == id);
@@ -33,7 +33,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return createdUserProfile.Entity;
         }
 
-        public async Task<UserProfile> UpdateAsync(int id, UserProfile entity)
+        public async Task<UserProfile> UpdateAsync(UserProfile entity)
         {
             var updatedUserProfile = _context.UserProfiles.Update(entity);
             return updatedUserProfile.Entity;

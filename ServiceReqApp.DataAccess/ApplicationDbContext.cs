@@ -4,7 +4,7 @@ using ServiceReqApp.Domain;
 
 namespace ServiceReqApp.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User> /*DbContext*/
     {
         public DbSet<Request> Requests { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }

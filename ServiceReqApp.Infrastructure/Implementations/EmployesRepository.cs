@@ -23,7 +23,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
                 .Include(e => e.User).ToListAsync();
         }
 
-        public async Task<Employee> GetByIdAsync(int id)
+        public async Task<Employee> GetByIdAsync(int? id)
         {
             return await _context.Employees
                 .Include(e => e.Requests)
@@ -37,7 +37,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return createdEmployee.Entity;
         }
 
-        public async Task<Employee> UpdateAsync(int id, Employee entity)
+        public async Task<Employee> UpdateAsync(Employee entity)
         {
             var updatedEmployee = _context.Employees.Update(entity);
             return updatedEmployee.Entity;
