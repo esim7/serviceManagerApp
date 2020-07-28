@@ -7,31 +7,30 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ServiceReqApp.Commands;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
+using ServiceReqApp.Infrastructure.DTO;
+using ServiceReqApp.Requests.User;
 
 namespace ServiceReqApp.Controllers
 {
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<User> _userManager;
 
-        public UsersController(IMediator mediator, ApplicationDbContext context, UserManager<User> userManager)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
-            _context = context;
-            _userManager = userManager;
         }
-
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            //var request = GetAllUsers();
-            //var response = await _mediator.Send(request);
-            return View(_userManager.Add);
+            var request = new GetAllUsersRequest();
+            var response = await _mediator.Send(request);
+
+            return View(response);
         }
 
         //// GET: Users/Details/5
@@ -52,27 +51,6 @@ namespace ServiceReqApp.Controllers
         //    return View(customer);
         //}
 
-        //// GET: Users/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Users/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Name,PhoneNumber,Address,CustomerInfo")] Customer customer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(customer);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(customer);
-        //}
 
         //// GET: Users/Edit/5
         //public async Task<IActionResult> Edit(int? id)

@@ -9,11 +9,10 @@ namespace ServiceReqApp.Infrastructure.DTO
         public string NormalizedUserName { get; set; }
         public string Email { get; set; }
         public string NormalizedEmail { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        public UserDto()
-        {
-            var user = new User();
-            
-        }
+        public UserProfile UserProfile { get; set; }
+        public Employee Employee { get; set; }
     }
 }
