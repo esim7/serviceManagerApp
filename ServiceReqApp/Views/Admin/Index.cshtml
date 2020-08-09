@@ -100,8 +100,8 @@
                     @Html.DisplayFor(modelItem => item.CustomerInfo)
                 </td>
                 <td>
-                    @*<a class="btn btn-primary" asp-action="UpdatePassword" asp-route-id="@item.Id">Изменить пароль</a>
-            <a class="btn btn-danger" asp-action="DeleteUser" asp-route-id="@item.Id">Удалить</a>*@
+                    <a class="btn btn-primary" asp-action="EditCustomer" asp-route-id="@item.Id">Изменить данные клиента</a>
+                    <a class="btn btn-danger" asp-action="DeleteCustomer" asp-route-id="@item.Id">Удалить</a>
                 </td>
             </tr>
             }

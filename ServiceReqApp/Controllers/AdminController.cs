@@ -8,6 +8,7 @@ using ServiceReqApp.Commands.Admin;
 using ServiceReqApp.Commands.Customer;
 using ServiceReqApp.Infrastructure.DTO;
 using ServiceReqApp.Requests.Admin;
+using ServiceReqApp.Requests.Customer;
 
 namespace ServiceReqApp.Controllers
 {
@@ -128,6 +129,55 @@ namespace ServiceReqApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> EditCustomer(int? id)
+        {
+            if (id == null)
+                return NotFound();
 
+            var request = new EditCustomerRequest(id);
+            var response = await _mediator.Send(request);
+
+            return View(response);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCustomer(int? id, CustomerDto customerDto)
+        {
+            if (id != customerDto.Id)
+            {
+                return NotFound();
+            }
+            var request = new EditCustomerCommand(id, customerDto);
+            var response = await _mediator.Send(request);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeleteCustomer(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var request = new DeleteCustomerCommand(id);
+            var response = await _mediator.Send(request);
+
+            return View(response);
+        }
+
+        [HttpPost, ActionName("DeleteUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var request = new DeleteUserCommandPost(id);
+            var response = await _mediator.Send(request);
+
+            if (response.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
+        }
     }
 }
