@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ServiceReqApp.Commands.Admin;
+using ServiceReqApp.Commands.Customer;
 using ServiceReqApp.Infrastructure.DTO;
 using ServiceReqApp.Requests.Admin;
 
@@ -117,20 +118,16 @@ namespace ServiceReqApp.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(Note note)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == HttpContext.User.Identity.Name);
-        //        note.IdentityUser = currentUser;
-        //        _context.Add(note);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(note);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCustomer(CustomerDto customerDto)
+        {
+            var request = new CreateCustomerCommand(customerDto);
+            var response = await _mediator.Send(request);
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
     }
 }

@@ -51,53 +51,60 @@
         </tbody>
     </table>
 
-<table class="table">
-    <h4>Список клиентов</h4>
-    <thead>
-        <tr>
-            <th>
-                <p>Идентификатор клиента</p>
-            </th>
-            <th>
-                <p>Наименование организации</p>
-            </th>
-            <th>
-                <p>Адресс</p>
-            </th>
-            <th>
-                <p>Номер телефона</p>
-            </th>
-            <th>
-                <p>Информация</p>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Customers)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerInfo)
-            </td>
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+    <table class="table">
+        <h4>Список клиентов</h4>
+        <a class="btn btn-outline-success mb-2" asp-controller="Admin" asp-action="CreateCustomer">Регистрация нового клиента</a>
+        <thead>
+            <tr>
+                <th>
+                    <p>Идентификатор клиента</p>
+                </th>
+                <th>
+                    <p>Наименование организации</p>
+                </th>
+                <th>
+                    <p>Адресс</p>
+                </th>
+                <th>
+                    <p>Номер телефона</p>
+                </th>
+                <th>
+                    <p>ФИО руководителя</p>
+                </th>
+                <th>
+                    <p>Информация</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Customers)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManagerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerInfo)
+                </td>
+                <td>
+                    @*<a class="btn btn-primary" asp-action="UpdatePassword" asp-route-id="@item.Id">Изменить пароль</a>
+            <a class="btn btn-danger" asp-action="DeleteUser" asp-route-id="@item.Id">Удалить</a>*@
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 
