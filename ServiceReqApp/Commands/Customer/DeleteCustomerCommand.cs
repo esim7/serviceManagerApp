@@ -5,9 +5,9 @@ namespace ServiceReqApp.Commands.Customer
 {
     public class DeleteCustomerCommand : IRequest<CustomerDto>
     {
-        public int CustomerId { get;}
+        public int? CustomerId { get;}
 
-        public DeleteCustomerCommand(int customerId)
+        public DeleteCustomerCommand(int? customerId)
         {
             CustomerId = customerId;
         }

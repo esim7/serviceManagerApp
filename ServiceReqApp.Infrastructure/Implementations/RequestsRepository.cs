@@ -44,7 +44,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return updatedRequest.Entity;
         }
 
-        public async Task<Request> RemoveAsync(int id)
+        public async Task<Request> RemoveAsync(int? id)
         {
             var deletedRequest = await _context.Requests.FindAsync(id);
             _context.Requests.Remove(deletedRequest);

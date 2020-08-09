@@ -154,7 +154,7 @@ namespace ServiceReqApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DeleteCustomer(string id)
+        public async Task<IActionResult> DeleteCustomer(int? id)
         {
             if (id == null)
             {
@@ -166,18 +166,14 @@ namespace ServiceReqApp.Controllers
             return View(response);
         }
 
-        [HttpPost, ActionName("DeleteUser")]
+        [HttpPost, ActionName("DeleteCustomer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            var request = new DeleteUserCommandPost(id);
+            var request = new DeleteCustomerCommandPost(id);
             var response = await _mediator.Send(request);
 
-            if (response.Succeeded)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            return BadRequest();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

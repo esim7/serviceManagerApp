@@ -43,7 +43,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return updatedEmployee.Entity;
         }
 
-        public async Task<Employee> RemoveAsync(int id)
+        public async Task<Employee> RemoveAsync(int? id)
         {
             var deletedEmployee = await _context.Employees.FindAsync(id);
             _context.Employees.Remove(deletedEmployee);

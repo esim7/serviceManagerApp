@@ -39,7 +39,7 @@ namespace ServiceReqApp.Infrastructure.Implementations
             return updatedUserProfile.Entity;
         }
 
-        public async Task<UserProfile> RemoveAsync(int id)
+        public async Task<UserProfile> RemoveAsync(int? id)
         {
             var deletedUserProfile = await _context.UserProfiles.FindAsync(id);
             _context.UserProfiles.Remove(deletedUserProfile);
