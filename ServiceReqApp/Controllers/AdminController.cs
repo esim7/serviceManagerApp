@@ -111,5 +111,26 @@ namespace ServiceReqApp.Controllers
             }
             return BadRequest();
         }
+
+        public IActionResult CreateCustomer()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(Note note)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == HttpContext.User.Identity.Name);
+        //        note.IdentityUser = currentUser;
+        //        _context.Add(note);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(note);
+        //}
+
     }
 }
