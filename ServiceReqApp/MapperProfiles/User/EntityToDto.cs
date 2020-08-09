@@ -8,6 +8,7 @@ namespace ServiceReqApp.MapperProfiles.User
         public EntityToDto()
         {
             CreateMap<Domain.User, UserDto>();
+            CreateMap<Domain.User, ChangePasswordDto>();
         }
     }
 }

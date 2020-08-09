@@ -50,7 +50,66 @@ namespace ServiceReqApp.Controllers
             var request = new EditUserCommand(id, userDto);
             var response = await _mediator.Send(request);
 
-            return RedirectToAction(nameof(Index));
+            if (response.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
+        }
+
+        public async Task<IActionResult> UpdatePassword(string id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var request = new UpdatePasswordRequest(id);
+            var response = await _mediator.Send(request);
+
+            return View(response);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdatePassword(string id, ChangePasswordDto passwordDto)
+        {
+            if (id != passwordDto.Id)
+            {
+                return NotFound();
+            }
+            var request = new UpdatePasswordCommand(id, passwordDto);
+            var response = await _mediator.Send(request);
+
+            if (response.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
+        }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var request = new DeleteUserCommand(id);
+            var response = await _mediator.Send(request);
+            
+            return View(response);
+        }
+
+        [HttpPost, ActionName("DeleteUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var request = new DeleteUserCommandPost(id);
+            var response = await _mediator.Send(request);
+
+            if (response.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
         }
     }
 }

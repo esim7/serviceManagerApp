@@ -6,6 +6,7 @@ namespace ServiceReqApp.Infrastructure.DTO
 {
     public class UserDto : IdentityUser
     {
+        public string Id { get; set; }
         [Required]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
