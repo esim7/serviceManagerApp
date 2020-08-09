@@ -1,14 +1,10 @@
-﻿using ServiceReqApp.Domain;
+﻿using Microsoft.AspNetCore.Identity;
+using ServiceReqApp.Domain;
 
 namespace ServiceReqApp.Infrastructure.DTO
 {
-    public class UserDto
+    public class UserDto : IdentityUser
     {
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string NormalizedUserName { get; set; }
-        public string Email { get; set; }
-        public string NormalizedEmail { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

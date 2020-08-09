@@ -10,10 +10,5 @@ namespace ServiceReqApp.Domain
 
         public UserProfile UserProfile { get; set; }
         public Employee Employee { get; set; }
-
-        public User()
-        {
-
-        }
     }
 }
