@@ -23,7 +23,7 @@ namespace ServiceReqApp.RequestHandlers.Admin
 
         public async Task<UserDto> Handle(EditUserRequest request, CancellationToken cancellationToken)
         {
-            var user = _userManager.Users.First(u => u.Id == request.UserId);
+            var user = await _userManager.FindByIdAsync(request.UserId);
             return _mapper.Map<UserDto>(user);
         }
     }

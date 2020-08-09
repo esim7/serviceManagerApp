@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ServiceReqApp.Commands.Admin;
+using ServiceReqApp.Infrastructure.DTO;
 using ServiceReqApp.Requests.Admin;
 
 namespace ServiceReqApp.Controllers
@@ -25,6 +27,7 @@ namespace ServiceReqApp.Controllers
             return View(response);
         }
 
+
         public async Task<IActionResult> EditUser(string id)
         {
             if (id == null)
@@ -34,6 +37,20 @@ namespace ServiceReqApp.Controllers
             var response = await _mediator.Send(request);
 
             return View(response);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(string id, UserDto userDto)
+        {
+            if (id != userDto.Id)
+            {
+                return NotFound();
+            }
+            var request = new EditUserCommand(id, userDto);
+            var response = await _mediator.Send(request);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

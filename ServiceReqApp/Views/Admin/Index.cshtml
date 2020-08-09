@@ -8,15 +8,21 @@
 <table class="table">
     <h4>Список пользователей</h4>
     <thead>
-    <tr>
-        <th>
-            <p>Идентификатор пользователя</p>
-        </th>
-        <th>
-            <p>Имя пользователя</p>
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                <p>Идентификатор пользователя</p>
+            </th>
+            <th>
+                <p>Имя пользователя</p>
+            </th>
+            <th>
+                <p>Имя</p>
+            </th>
+            <th>
+                <p>Фамилия</p>
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.Users)
@@ -29,8 +35,14 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                <a asp-action="EditUser" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="DeleteUser" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                <a asp-action="EditUser" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="DeleteUser" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
     }
@@ -38,7 +50,7 @@
 </table>
 
 <table class="table">
-    <h4>Список пользователей</h4>
+    <h4>Список клиентов</h4>
     <thead>
         <tr>
             <th>
