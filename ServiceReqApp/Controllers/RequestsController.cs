@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +14,18 @@ namespace ServiceReqApp.Controllers
 {
     public class RequestsController : Controller
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IMediator _mediator;
 
-        public RequestsController(IUnitOfWork uow)
+        public RequestsController(IMediator mediator)
         {
-            _uow = uow;
+            _mediator = mediator;
         }
 
-        // GET: Requests
         public async Task<IActionResult> Index()
         {
             return View(await _uow.RequestsRepository.GetAllAsync());
         }
 
-        // GET: Requests/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

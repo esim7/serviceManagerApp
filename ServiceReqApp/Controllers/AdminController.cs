@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ServiceReqApp.Commands.Admin;
@@ -29,7 +26,6 @@ namespace ServiceReqApp.Controllers
             return View(response);
         }
 
-
         public async Task<IActionResult> EditUser(string id)
         {
             if (id == null)
@@ -56,6 +52,7 @@ namespace ServiceReqApp.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
 
@@ -78,6 +75,7 @@ namespace ServiceReqApp.Controllers
             {
                 return NotFound();
             }
+
             var request = new UpdatePasswordCommand(id, passwordDto);
             var response = await _mediator.Send(request);
 
@@ -85,6 +83,7 @@ namespace ServiceReqApp.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
 
@@ -94,6 +93,7 @@ namespace ServiceReqApp.Controllers
             {
                 return NotFound();
             }
+
             var request = new DeleteUserCommand(id);
             var response = await _mediator.Send(request);
             
@@ -111,6 +111,7 @@ namespace ServiceReqApp.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
 
