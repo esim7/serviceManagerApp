@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
 using ServiceReqApp.Infrastructure.Interfaces;
+using ServiceReqApp.Requests.Request;
 
 namespace ServiceReqApp.Controllers
 {
@@ -23,46 +24,49 @@ namespace ServiceReqApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _uow.RequestsRepository.GetAllAsync());
+            var request = new GetDataRequest();
+            var response = await _mediator.Send(request);
+
+            return View(response);
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var request = await _uow.RequestsRepository.GetByIdAsync(id);
-            if (request == null)
-            {
-                return NotFound();
-            }
+        //    var request = await _uow.RequestsRepository.GetByIdAsync(id);
+        //    if (request == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(request);
-        }
+        //    return View(request);
+        //}
 
-        // GET: Requests/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Requests/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Requests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,CreationDate,CompletedDate,RequestType,IsCompleted,CustomerId,EmployeeId")] Request request)
-        {
-            if (ModelState.IsValid)
-            {
-                await _uow.RequestsRepository.CreateAsync(request);
-                await _uow.SaveAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(request);
-        }
+        //// POST: Requests/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Description,CreationDate,CompletedDate,RequestType,IsCompleted,CustomerId,EmployeeId")] Request request)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _uow.RequestsRepository.CreateAsync(request);
+        //        await _uow.SaveAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(request);
+        //}
 
         // GET: Requests/Edit/5
         //public async Task<IActionResult> Edit(int? id)
