@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
@@ -8,7 +9,7 @@ using ServiceReqApp.Requests.Request;
 
 namespace ServiceReqApp.RequestHandlers.Request
 {
-    public class GetDataRequestHandler : IRequestHandler<GetDataRequest, RequestDto>
+    public class GetDataRequestHandler : IRequestHandler<GetDataRequest, List<RequestDto>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
@@ -19,11 +20,11 @@ namespace ServiceReqApp.RequestHandlers.Request
             _mapper = mapper;
         }
 
-        public async Task<RequestDto> Handle(GetDataRequest request, CancellationToken cancellationToken)
+        public async Task<List<RequestDto>> Handle(GetDataRequest request, CancellationToken cancellationToken)
         {
             var requests = await _uow.RequestsRepository.GetAllAsync();
 
-            return _mapper.Map<RequestDto>(request);
+            return _mapper.Map<List<RequestDto>>(requests);
         }
     }
 }

@@ -4,40 +4,38 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
 <table class="table">
+    <h4>Список заявок</h4>
+    <a class="btn btn-outline-success mb-2" asp-controller="Requests" asp-action="Create">Регистрация нового пользователя</a>
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompletedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RequestType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCompleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCompleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -66,6 +64,6 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

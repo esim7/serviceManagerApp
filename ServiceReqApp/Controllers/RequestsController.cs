@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
+using ServiceReqApp.Infrastructure.DTO;
 using ServiceReqApp.Infrastructure.Interfaces;
 using ServiceReqApp.Requests.Request;
 
@@ -46,27 +47,25 @@ namespace ServiceReqApp.Controllers
         //    return View(request);
         //}
 
-        //// GET: Requests/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        public IActionResult Create()
+        {
+            ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)));
+            ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
+            return View();
+        }
 
-        //// POST: Requests/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Description,CreationDate,CompletedDate,RequestType,IsCompleted,CustomerId,EmployeeId")] Request request)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _uow.RequestsRepository.CreateAsync(request);
-        //        await _uow.SaveAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(request);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Description,CreationDate,CompletedDate,RequestType,IsCompleted,CustomerId,EmployeeId")] Request request)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    await _uow.RequestsRepository.CreateAsync(request);
+            //    await _uow.SaveAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            return View();
+        }
 
         // GET: Requests/Edit/5
         //public async Task<IActionResult> Edit(int? id)
