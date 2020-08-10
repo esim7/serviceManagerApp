@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using ServiceReqApp.Domain;
+using ServiceReqApp.Infrastructure.Interfaces;
 
 namespace ServiceReqApp.Areas.Identity.Pages.Account
 {
@@ -25,16 +27,19 @@ namespace ServiceReqApp.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly IUnitOfWork _uow;
+
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _uow = uow;
         }
 
         [BindProperty]
@@ -53,6 +58,10 @@ namespace ServiceReqApp.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Фамилия")]
             public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Должность")]
+            public Position Position { get; set; }
 
             [Required]
             [EmailAddress]
@@ -85,6 +94,10 @@ namespace ServiceReqApp.Areas.Identity.Pages.Account
             {
                 var user = new User { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName};
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                await _uow.EmployesRepository.CreateAsync(new Employee(Input.Position, user));
+                await _uow.SaveAsync();
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

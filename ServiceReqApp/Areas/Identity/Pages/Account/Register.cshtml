@@ -37,7 +37,12 @@
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <div class="form-group">
+                <label asp-for="Input.Position"></label>
+                <select asp-for="Input.Position" asp-items="Html.GetEnumSelectList<Position>()" class="form-control"></select>
+                <span asp-validation-for="Input.Position" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary mt-5">Register</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">

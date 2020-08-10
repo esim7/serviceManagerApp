@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
 using ServiceReqApp.Infrastructure.DTO;
@@ -47,11 +48,17 @@ namespace ServiceReqApp.Controllers
         //    return View(request);
         //}
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)));
+            //ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)), );
             //ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
-            
+
+            var request = new GetDataToCreateNewRequest();
+            var response = await _mediator.Send(request);
+
+            ViewBag.Customers = new SelectList(response.Customers, "Id", "Name");
+            ViewBag.Employees = new SelectList(response.Employees, "Id", "FirstName");
+
             return View();
         }
 
