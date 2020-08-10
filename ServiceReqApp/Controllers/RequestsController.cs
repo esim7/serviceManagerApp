@@ -49,8 +49,8 @@ namespace ServiceReqApp.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)));
-            ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
+            //ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)));
+            //ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
             return View();
         }
 
