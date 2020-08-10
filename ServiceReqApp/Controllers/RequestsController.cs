@@ -51,6 +51,7 @@ namespace ServiceReqApp.Controllers
         {
             //ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)));
             //ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
+            
             return View();
         }
 
