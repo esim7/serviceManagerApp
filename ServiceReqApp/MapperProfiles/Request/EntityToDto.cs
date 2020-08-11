@@ -7,7 +7,7 @@ namespace ServiceReqApp.MapperProfiles.Request
     {
         public EntityToDto()
         {
-            CreateMap<Domain.Customer, CustomerDto>();
+            CreateMap<Domain.Request, RequestDto>();
         }
     }
 }

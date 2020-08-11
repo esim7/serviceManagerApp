@@ -26,16 +26,18 @@ namespace ServiceReqApp.Infrastructure.DTO
         [Display(Name = "Статус выполнения")]
         public bool IsCompleted { get; set; } = false;
 
-        public int CustomerId { get; set; }
-        
         [Display(Name = "Клиент")]
         [Required]
-        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
 
-        public int EmployeeId { get; set; }
+        [Display(Name = "Клиент")]
+        public Customer Customer { get; set; }
 
         [Display(Name = "Исполнитель")]
         [Required]
+        public int EmployeeId { get; set; }
+
+        [Display(Name = "Исполнитель")]
         public Employee Employee { get; set; }
     }
 }

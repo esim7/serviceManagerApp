@@ -1,4 +1,5 @@
-﻿@model ServiceReqApp.Infrastructure.DTO.RequestDto
+﻿@using ServiceReqApp.Domain
+@model ServiceReqApp.Infrastructure.DTO.RequestDto
 
 @{
     ViewData["Title"] = "Create";
@@ -19,7 +20,8 @@
 
             <div class="form-group">
                 <label asp-for="RequestType" class="control-label"></label>
-                @Html.DropDownListFor(m => m.RequestType, ViewBag.RequestTypes as SelectList, new { @class = "form-control" })
+                @*@Html.DropDownListFor(m => m.RequestType, ViewBag.RequestTypes as SelectList, new { @class = "form-control" })*@
+                <select asp-for="RequestType" asp-items="Html.GetEnumSelectList<RequestType>()" class="form-control"></select>
                 <span asp-validation-for="RequestType" class="text-danger"></span>
             </div>
 

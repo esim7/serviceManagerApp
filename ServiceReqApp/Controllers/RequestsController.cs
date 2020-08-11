@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using ServiceReqApp.Commands.Request;
 using ServiceReqApp.DataAccess;
 using ServiceReqApp.Domain;
 using ServiceReqApp.Infrastructure.DTO;
@@ -53,7 +54,7 @@ namespace ServiceReqApp.Controllers
             var request = new GetDataToCreateNewRequest();
             var response = await _mediator.Send(request);
 
-            ViewBag.RequestTypes = new SelectList(Enum.GetValues(typeof(RequestType)));
+            //ViewBag.RequestTypes = new SelectList(Enum.GetValues(typeof(RequestType)));
             ViewBag.Customers = new SelectList(response.Customers, "Id", "Name");
             ViewBag.Employees = new SelectList(response.Employees, "Id", "User.FirstName");
 
@@ -62,14 +63,15 @@ namespace ServiceReqApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,CreationDate,CompletedDate,RequestType,IsCompleted,CustomerId,EmployeeId")] Request request)
+        public async Task<IActionResult> Create(RequestDto requestDto)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    await _uow.RequestsRepository.CreateAsync(request);
-            //    await _uow.SaveAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
+            if (ModelState.IsValid)
+            {
+                var request = new CreateNewRequestCommand(requestDto);
+                var response = await _mediator.Send(request);
+
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
