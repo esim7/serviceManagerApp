@@ -50,14 +50,12 @@ namespace ServiceReqApp.Controllers
 
         public async Task<IActionResult> Create()
         {
-            //ViewBag.Customers = new SelectList(Enum.GetValues(typeof(CustomerDto)), );
-            //ViewBag.Employees = new SelectList(Enum.GetValues(typeof(EmployeeDto)));
-
             var request = new GetDataToCreateNewRequest();
             var response = await _mediator.Send(request);
 
+            ViewBag.RequestTypes = new SelectList(Enum.GetValues(typeof(RequestType)));
             ViewBag.Customers = new SelectList(response.Customers, "Id", "Name");
-            ViewBag.Employees = new SelectList(response.Employees, "Id", "FirstName");
+            ViewBag.Employees = new SelectList(response.Employees, "Id", "User.FirstName");
 
             return View();
         }
