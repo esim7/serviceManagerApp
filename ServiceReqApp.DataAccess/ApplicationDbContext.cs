@@ -24,6 +24,11 @@ namespace ServiceReqApp.DataAccess
                 .HasOne(e => e.Employee)
                 .WithOne(e => e.User)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Request>()
+                .HasOne(p => p.Employee)
+                .WithMany(t => t.Requests)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

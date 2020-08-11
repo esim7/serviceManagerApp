@@ -11,9 +11,9 @@ namespace ServiceReqApp.Domain
         public RequestType RequestType { get; set; }
         public bool IsCompleted { get; set; } = false;
 
-        public int  CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public Employee Employee { get; set; }
     }
 }
