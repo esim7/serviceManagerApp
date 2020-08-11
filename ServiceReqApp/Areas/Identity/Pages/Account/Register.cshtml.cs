@@ -95,7 +95,7 @@ namespace ServiceReqApp.Areas.Identity.Pages.Account
                 var user = new User { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName};
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                await _uow.EmployesRepository.CreateAsync(new Employee(Input.Position, user));
+                await _uow.EmployesRepository.CreateAsync(new Employee(String.Concat(Input.FirstName," ", Input.LastName),Input.Position, user));
                 await _uow.SaveAsync();
 
                 if (result.Succeeded)

@@ -16,17 +16,14 @@ namespace ServiceReqApp.DataAccess
         {
         }
 
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    builder.Entity<User>()
-        //        .HasOne(a => a.Employee)
-        //        .WithOne(b => b.User)
-        //        .HasForeignKey<Employee>(b => b.UserId);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-        //    builder.Entity<User>()
-        //        .HasOne(a => a.UserProfile)
-        //        .WithOne(b => b.User)
-        //        .HasForeignKey<Employee>(b => b.UserId);
-        //}
+            builder.Entity<User>()
+                .HasOne(e => e.Employee)
+                .WithOne(e => e.User)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
