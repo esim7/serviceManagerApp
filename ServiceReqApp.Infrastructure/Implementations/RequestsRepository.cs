@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ServiceReqApp.DataAccess;
@@ -30,6 +31,14 @@ namespace ServiceReqApp.Infrastructure.Implementations
                 .Include(c=>c.Customer)
                 .Include(e=>e.Employee)
                 .FirstOrDefaultAsync(r=>r.Id == id);
+        }
+
+        public async Task<List<Request>> GetByEmployeeIdAsync(string id)
+        {
+            return await _context.Requests
+                .Include(c => c.Customer)
+                .Include(e => e.Employee)
+                .Where(r => r.Employee.UserId == id).ToListAsync();
         }
 
         public async Task<Request> CreateAsync(Request entity)
